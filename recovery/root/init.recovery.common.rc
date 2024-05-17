@@ -162,9 +162,20 @@ on boot
     chmod 660 /sys/class/power_supply/battery/input_current_limit
     chmod 660 /sys/class/power_supply/battery/constant_charge_current
 
+#add for board init.rc for recovery mode
+#on post-fs
+    #insmod /vendor/lib/modules/focaltech_ft8756_spi_ts.ko
 on fs
+    start load_modules
     #mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
+
+service load_modules /sbin/load_modules.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
 
 on post-fs-data
     # We chown/chmod /data again so because mount is run as root + defaults
