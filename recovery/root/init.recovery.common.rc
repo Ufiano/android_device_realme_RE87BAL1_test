@@ -157,6 +157,9 @@ on boot
     write /sys/block/mmcblk0boot0/force_ro 0
     write /sys/block/mmcblk0boot1/force_ro 0
 
+    insmod /vendor/lib/modules/focaltech_ft8756_spi_ts.ko
+    start load_ts_firmware
+
     chmod 660 /sys/class/power_supply/battery/charger.0/stop_charge
     chmod 660 /sys/class/power_supply/battery/charger.0/jeita_control
     chmod 660 /sys/class/power_supply/battery/input_current_limit
