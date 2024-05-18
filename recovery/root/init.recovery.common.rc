@@ -211,6 +211,13 @@ on post-fs-data
     mkdir /mnt/vendor/productinfo 0771 system root
     mkdir /data/vendor/local/otpdata 0777 system root
 
+service load_ts_firmware /system/bin/load_ts_firmware.sh
+    oneshot
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
 on property:ro.debuggable=1
     write /sys/module/smsg/parameters/debug_enable 1
 
